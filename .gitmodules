@@ -1,0 +1,6 @@
+[submodule "onedrive"]
+	path = onedrive
+	url = https://github.com/abraunegg/onedrive.git
+[submodule "onedrive_tray"]
+	path = onedrive_tray
+	url = git@github.com:DanielBorgesOliveira/onedrive_tray.git

@@ -1,0 +1,22 @@
+--- a/onedrive_tray/onedrive_tray.service
++++ b/onedrive_tray/onedrive_tray.service
+@@ -5,7 +5,7 @@
+ Wants=network-online.target
+
+ [Service]
+-ExecStart=/usr/local/bin/onedrive_tray -s
++ExecStart=/usr/bin/onedrive_tray -s
+ Restart=on-failure
+ RestartSec=7
+ RestartPreventExitStatus=3
+--- a/onedrive_tray/systray.pro
++++ b/onedrive_tray/systray.pro
+@@ -4,7 +4,7 @@
+ INCLUDEPATH += .
+
+ # Install info
+-target.path += /usr/local/bin/
++target.path += /usr/bin/
+ unitfile.path += /usr/lib/systemd/user/
+ unitfile.files = onedrive_tray.service
+ INSTALLS += target

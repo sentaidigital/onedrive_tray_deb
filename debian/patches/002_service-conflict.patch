@@ -1,0 +1,11 @@
+index 9b076f8..aff09d0 100644
+--- a/onedrive_tray/onedrive_tray.service
++++ b/onedrive_tray/onedrive_tray.service
+@@ -3,6 +3,7 @@
+ Documentation=https://github.com/DanielBorgesOliveira/onedrive_tray
+ After=network-online.target
+ Wants=network-online.target
++Conflicts=onedrive.service
+ 
+ [Service]
+ ExecStart=/usr/bin/onedrive_tray -s

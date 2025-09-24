@@ -1,0 +1,19 @@
+Description: Disable version checks notifications
+ Turn off notifications about a new version being available.
+Author: Sebastien Badia <sbadia@debian.org>
+Origin: other
+Bug-Debian: https://bugs.debian.org/1101407
+Forwarded: not-needed
+Last-Update: 2025-09-08
+
+--- a/onedrive/src/util.d
++++ b/onedrive/src/util.d
+@@ -1150,7 +1150,7 @@
+ 					displayObsolete = false;
+ 				} else {
+ 					// outside grace period
+-					displayObsolete = true;
++					displayObsolete = false;
+ 				}
+ 			}
+ 			

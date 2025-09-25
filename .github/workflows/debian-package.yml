@@ -28,7 +28,7 @@ jobs:
         dpkg-buildpackage -b -uc -us
 
     - name: Upload Debian artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: debian-packages
         path: "*.deb"

@@ -2,7 +2,7 @@ Source: onedrive-tray
 Section: web
 Priority: optional
 Maintainer: John Franklin <franklin@sentaidigital.com>
-Build-Depends: debhelper-compat (=13), dh-exec, gdc, ldc, make, qtchooser, qtbase5-dev, libcurl4-openssl-dev, libsqlite3-dev
+Build-Depends: debhelper-compat (=13), dh-exec, gdc, ldc, make, qtchooser, qtbase5-dev, libcurl4-openssl-dev, libdbus-1-dev, libsqlite3-dev
 Standards-Version: 3.9.8
 Homepage: https://github.com/DanielBorgesOliveira/onedrive_tray
 

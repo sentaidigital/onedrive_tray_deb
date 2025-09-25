@@ -19,7 +19,7 @@ jobs:
     - name: Set up build environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y debhelper-compat dh-exec dh-make devscripts build-essential gdc make qtchooser qtbase5-dev libcurl4-openssl-dev libsqlite3-dev
+        sudo apt-get install -y debhelper-compat dh-exec dh-make devscripts build-essential gdc ldc make qtchooser qtbase5-dev libcurl4-openssl-dev libsqlite3-dev
 
     - name: Build Debian package
       run: |

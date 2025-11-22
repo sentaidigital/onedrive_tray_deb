@@ -26,9 +26,11 @@ jobs:
         # Build the package directly using dpkg-buildpackage
         # This will use the existing debian/ directory structure
         dpkg-buildpackage -b -uc -us
+        mkdir artifacts
+        mv ../*.deb ../*.changes ../*.buildinfo artifacts
 
     - name: Upload Debian artifacts
       uses: actions/upload-artifact@v4
       with:
         name: debian-packages
-        path: "../*.deb"
+        path: "artifacts/*.deb"

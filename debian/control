@@ -10,5 +10,6 @@ Package: onedrive-tray
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, curl
 Conflicts: onedrive
-Description: Onedrive Tray
-  A system tray for OneDrive Linux.
+Description: Onedrive with system tray.
+ A system tray for OneDrive Linux. This package includes the onedrive
+ executable, the tray, and a user systemd service.

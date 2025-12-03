@@ -1,3 +1,2 @@
-onedrive/onedrive usr/bin
 onedrive_tray/build/onedrive_tray usr/bin
-onedrive_tray/onedrive_tray_*.qm usr/share/onedrive_tray/translations/
+onedrive_tray/onedrive_tray_*.qm usr/share/onedrive_tray/translations

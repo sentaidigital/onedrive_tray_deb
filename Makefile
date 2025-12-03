@@ -8,8 +8,11 @@ onedrive_tray/onedrive_tray:
 	make -C onedrive_tray/build
 
 onedrive/onedrive:
-	cd onedrive && ./configure
+	cd onedrive && ./configure --prefix=/usr --sysconfdir=/etc
 	make -C onedrive
+
+install:
+	make -C onedrive install
 
 clean:
 	[ ! -f onedrive/Makefile ] || make -C onedrive clean

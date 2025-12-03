@@ -1,0 +1,20 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://github.com/sentaidigital/onedrive_tray_deb
+Upstream-Name: Onedrive Tray Debian
+Upstream-Contact: John Franklin <franklin@sentaidigital.com>
+
+Files:
+ onedrive/*
+License: GPL-3
+Copyright: 2025 abraunegg
+
+Files:
+ onedrive_tray/*
+License: GPL-3
+Copyright: 2025 Daniel Borges de Oliveira
+
+Files:
+ debian/*
+ Makefile
+License: GPL-3
+Copyright: 2025 John Franklin

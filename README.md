@@ -46,4 +46,4 @@ dpkg-buildpackage -us -uc
 ## Upstream Projects
 
 - [onedrive](https://github.com/abraunegg/onedrive)
-- [onedrive_tray](https://github.com/sentaidigital/onedrive_tray)
+- [onedrive_tray](https://github.com/DanielBorgesOliveira/onedrive_tray)

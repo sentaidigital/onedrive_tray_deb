@@ -1,0 +1,49 @@
+stages:
+  - build
+  - release
+
+debian-package:
+  stage: build
+  image: debian:latest
+  before_script:
+    - test -z "$APT_PROXY" || echo "Acquire::http::Proxy \"$APT_PROXY\";" > /etc/apt/apt.conf.d/99proxy
+    - DEBIAN_FRONTEND=noninteractive apt-get update
+    - DEBIAN_FRONTEND=noninteractive apt-get install -qq -y --no-install-recommends apt-listchanges build-essential debhelper dh-make devscripts lintian
+    - DEBIAN_FRONTEND=noninteractive apt-get install -qq -y --no-install-recommends dh-exec gdc ldc make qtchooser qtbase5-dev libcurl4-openssl-dev libdbus-1-dev libsqlite3-dev
+  script:
+    - dpkg-buildpackage -us -uc -rfakeroot -b
+    - lintian
+    - mv -v ../*.deb ../*.changes ../*.buildinfo .
+    - apt-listchanges --no-network --latest=1 -f text $(ls -1 *.deb | head -1) | tail +7 | head -n -2 > changelog.txt
+    - CHANGELOG="$(base64 --wrap 0 changelog.txt)"
+    - echo "CHANGELOG=$CHANGELOG" > output.env
+  artifacts:
+    reports:
+      dotenv: output.env
+    paths:
+      - "*.deb"
+      - "*.changes"
+      - "*.buildinfo"
+    expire_in: 1 week
+
+create-release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/cli:latest
+  needs:
+    - job: debian-package
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_TAG
+  before_script:
+    - export PACKAGE_VERSION=$(head -1 debian/changelog |  grep -o '(.*)' - | sed 's/[()]//g')
+    - echo "Checking if tag $CI_COMMIT_TAG matches changelog version $PACKAGE_VERSION"
+    - if [ "$CI_COMMIT_TAG" != "$PACKAGE_VERSION" ]; then echo "Error - Tag $CI_COMMIT_TAG does not match changelog version $PACKAGE_VERSION"; exit 1; fi
+  script:
+    - |
+      if [ -z "$CI_COMMIT_TAG" ]; then
+        echo "No tag found, skipping release creation"
+        exit 0
+      fi
+      echo $CHANGELOG | base64 -d > release-notes.txt
+      glab auth login --hostname "$CI_SERVER_HOST" --job-token "$CI_JOB_TOKEN"
+      glab release create "$CI_COMMIT_TAG" --name "Release $CI_COMMIT_TAG" --notes-file release-notes.txt --use-package-registry *.deb
